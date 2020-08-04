@@ -39,6 +39,45 @@ Red vs. Blue
 
 Draw a 20 by 20 grid on a 720x720 window.  Each cell in the grid should be 35 pixels high and wide and the grid should be drawn 10 pixels off the top and left borders of the screen.  To do this, you should use the `Graphics` class from the Java libraries.  Be sure to consult the tips video for this task (it is a link in iLearn).  Without it, you will be very confused.
 
+import javax.swing.*;
+import java.awt.*;
+
+public class Main extends JFrame{
+    public static void main(String[] args) throws Exception {
+        Main window = new Main();
+        //window.run();
+    }
+
+    public class Canvas extends JPanel{
+public Canvas(){
+    setPreferredSize(new Dimension(720,720));
+}
+    }
+
+    @Override
+    public void paint(Graphics g){
+ for(int i =10; i <710; i+=35){
+     for(int j =10; j<710;j+=35){
+        g.setColor(Color.WHITE);
+     g.fillRect(i,j,35,35);
+     g.setColor(Color.BLACK);
+     g.drawRect(i,j,35,35);
+ }}
+    }
+
+    public Main(){
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Canvas canvas = new Canvas();
+        this.setContentPane(canvas);
+        this.pack();
+        this.setVisible(true);
+    }
+
+    //public void run(){
+
+    //}
+}
+
 # Task 4
 
 The "grid" has no identity - it is just drawn.  Later on we will need to do lots of things "with" this grid.  We will modify it and adjust it and ask it questions.  Our task here is to refactor the program to give this grid an identity.  We will create an object to represent the grid and will give that object its own `paint` method for drawing the grid.
