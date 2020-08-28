@@ -1,13 +1,31 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Actor {
     Color colour;
     Cell loc;
+    ArrayList<Polygon> display;
+    float redness;
+    int turns;
+    int moves;
 
     public void paint(Graphics g){
-        g.setColor(colour);
-        g.fillRect(loc.x + 5, loc.y + 5, loc.width - 10, loc.height - 10);
-        g.setColor(Color.GRAY);
-        g.drawRect(loc.x + 5, loc.y + 5, loc.width - 10, loc.height - 10);
+        for(Polygon p: display){
+            g.setColor(new Color(redness, 0f, 1f-redness));
+            g.fillPolygon(p);
+            g.setColor(Color.GRAY);
+            g.drawPolygon(p);
+        }
+    }
+
+    public abstract void setPoly();
+
+    public boolean isTeamRed(){
+        return redness >= 0.5;
+    }
+
+    public void setLocation(Cell loc){
+        this.loc = loc;
+        setPoly();
     }
 }
